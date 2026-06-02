@@ -3318,7 +3318,8 @@ function confetti(x,y){
 #login .login-inner{position:relative!important;z-index:2!important;}
 #p5-mask{position:absolute;left:50%;top:7%;transform:translateX(-50%) rotate(-3deg);width:min(66vw,400px);z-index:0;pointer-events:none;
   filter:drop-shadow(6px 7px 0 #000);opacity:.95;}
-#p5-mask path{fill:#e60012;stroke:#fff;stroke-width:3;}
+#p5-mask .m-w{fill:#fff;}
+#p5-mask .m-b{fill:#0a0a0a;}
 @media(max-width:640px){.p5-vert{display:none;}#p5-mask{top:3%;width:80vw;}}
 </style>
 <script>
@@ -3356,8 +3357,15 @@ function confetti(x,y){
     var lg=document.getElementById('login');
     if(lg&&!document.getElementById('p5-mask')){
       var mask=document.createElementNS('http://www.w3.org/2000/svg','svg');
-      mask.id='p5-mask'; mask.setAttribute('viewBox','0 0 200 92');
-      mask.innerHTML="<path fill-rule='evenodd' d='M8 46 C20 8 72 6 96 30 C100 34 100 34 104 30 C128 6 180 8 192 46 C180 84 128 86 104 62 C100 58 100 58 96 62 C72 86 20 84 8 46 Z M44 42 a17 12 0 1 0 0.1 0 Z M156 42 a17 12 0 1 0 0.1 0 Z'/>";
+      mask.id='p5-mask'; mask.setAttribute('viewBox','0 0 200 130');
+      mask.innerHTML=
+        "<path class='m-w' d='M100 40 C72 20 34 16 8 8 C20 44 26 70 46 86 C66 100 86 108 100 120 C114 108 134 100 154 86 C174 70 180 44 192 8 C166 16 128 20 100 40 Z'/>"+
+        "<path class='m-b' d='M34 56 C46 43 66 41 86 50 C75 55 60 65 43 64 C39 62 35 59 34 56 Z'/>"+
+        "<path class='m-b' d='M166 56 C154 43 134 41 114 50 C125 55 140 65 157 64 C161 62 165 59 166 56 Z'/>"+
+        "<polygon class='m-w' points='30,55 40,49 41,59'/><polygon class='m-w' points='48,63 53,53 58,63'/>"+
+        "<polygon class='m-w' points='62,64 67,55 72,64'/><polygon class='m-w' points='76,62 81,54 83,60'/>"+
+        "<polygon class='m-w' points='170,55 160,49 159,59'/><polygon class='m-w' points='152,63 147,53 142,63'/>"+
+        "<polygon class='m-w' points='138,64 133,55 128,64'/><polygon class='m-w' points='124,62 119,54 117,60'/>";
       lg.appendChild(mask);
       var vt=document.createElement('div'); vt.className='p5-vert'; vt.textContent='TAKE YOUR HEART'; lg.appendChild(vt);
     }
