@@ -3295,6 +3295,9 @@ function confetti(x,y){
   function initP5(){
     document.querySelectorAll('.page-title').forEach(ransomize);
     var mono=document.querySelector('.login-monogram'); if(mono)ransomize(mono);
+    /* move Дима/Оля overlay out of the clipped calling-card so it isn't cropped */
+    var who=document.getElementById('login-step-who');
+    if(who&&who.parentNode!==document.body)document.body.appendChild(who);
     if(!document.getElementById('p5-stars')){
       var s="<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90'>"+
         "<g fill='none' stroke='#ffffff' stroke-opacity='0.07' stroke-width='2'>"+
