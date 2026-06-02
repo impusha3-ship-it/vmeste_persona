@@ -2304,8 +2304,9 @@ function renderQuestion(){
   function ansBlock(who){
     const name=whoName(who);
     const val=td[who]||'';
-    if(!val) return `<div class="q-ans ${who}"><div class="q-ans-who">${name}</div><div class="q-ans-empty">ещё не ответил(а)</div></div>`;
-    return `<div class="q-ans ${who}"><div class="q-ans-who">${name}</div><div class="q-ans-text">${esc(val)}</div></div>`;
+    const av=`<div class="q-av">${esc(name.charAt(0))}</div>`;
+    if(!val) return `<div class="q-ans ${who}">${av}<div class="q-bub"><div class="q-ans-who">${name}</div><div class="q-ans-empty">ещё не ответил(а)</div></div></div>`;
+    return `<div class="q-ans ${who}">${av}<div class="q-bub"><div class="q-ans-who">${name}</div><div class="q-ans-text">${esc(val)}</div></div></div>`;
   }
   let html=`<div class="q-card">
     <div class="q-date">${now.getDate()} ${MRG[now.getMonth()]} · вопрос дня</div>
@@ -3280,7 +3281,45 @@ function confetti(x,y){
 #q-wrap > .q-card:first-child .q-form{transform:rotate(1.7deg)!important;background:#0e0e0e!important;border:3px solid #fff!important;
   padding:1rem 1.1rem!important;margin-top:1.6rem!important;box-shadow:4px 4px 0 #000!important;}
 #q-wrap > .q-card:first-child .q-hint{transform:rotate(1.7deg)!important;}
-</style>
+
+/* ===== CHAT AVATARS (yellow corner) — restructured bubble ===== */
+.q-ans{background:transparent!important;border:none!important;box-shadow:none!important;display:flex!important;
+  align-items:flex-start!important;gap:.7rem!important;max-width:90%!important;padding:0!important;margin-bottom:0!important;}
+.q-ans::before,.q-ans::after{display:none!important;}
+.q-ans.o{flex-direction:row-reverse!important;}
+.q-av{flex:0 0 auto!important;width:46px;height:46px;background:#0a0a0a;border:3px solid #fff;display:flex;
+  align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;
+  font-size:24px;color:#fff;position:relative;box-shadow:3px 3px 0 #000;}
+.q-ans.o .q-av{background:#f7f3ea;color:#0a0a0a;border-color:#000;}
+.q-av::after{content:'';position:absolute;left:0;bottom:0;border-style:solid;border-width:0 0 15px 15px;
+  border-color:transparent transparent #ffd400 transparent;}
+.q-bub{position:relative;flex:1 1 auto;min-width:0;border:3px solid #fff;padding:.85rem 1rem;}
+.q-ans.d .q-bub{background:#0a0a0a;color:#fff;box-shadow:5px 5px 0 var(--p5-red);}
+.q-ans.o .q-bub{background:#f7f3ea;color:#141414;border-color:#000;box-shadow:5px 5px 0 #000;}
+.q-ans.o .q-bub .q-ans-text{color:#222!important;}
+.q-ans.o .q-bub .q-ans-empty{color:#555!important;}
+.q-bub::after{content:'';position:absolute;top:13px;width:0;height:0;border:10px solid transparent;}
+.q-ans.d .q-bub::after{left:-20px;border-right-color:#fff;}
+.q-ans.o .q-bub::after{right:-20px;border-left-color:#000;}
+.q-ans-who{position:static!important;background:none!important;border:none!important;padding:0!important;
+  margin:0 0 .35rem!important;font-family:'Oswald',sans-serif!important;font-style:italic!important;font-size:13px!important;letter-spacing:.06em!important;}
+.q-ans.d .q-ans-who{color:var(--p5-cyan)!important;}
+.q-ans.o .q-ans-who{color:var(--p5-red)!important;}
+
+/* ===== BARCODE + VERTICAL TEXT + MASK ===== */
+.p5-barcode{height:30px;width:130px;
+  background:repeating-linear-gradient(90deg,#0a0a0a 0 2px,transparent 2px 4px,#0a0a0a 4px 7px,transparent 7px 9px,#0a0a0a 9px 12px,transparent 12px 17px,#0a0a0a 17px 19px,transparent 19px 23px);}
+.p5-card-foot{display:flex;align-items:center;gap:12px;margin-top:1.4rem;}
+.p5-card-foot .code{font-family:'Oswald',sans-serif;font-style:italic;font-weight:600;color:#0a0a0a;letter-spacing:.18em;font-size:12px;}
+#login .p5-barcode{filter:none;}
+.p5-vert{position:absolute;left:14px;top:50%;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;
+  font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;font-size:clamp(22px,4vw,40px);letter-spacing:.12em;
+  color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.35);z-index:1;pointer-events:none;text-transform:uppercase;}
+#login .login-inner{position:relative!important;z-index:2!important;}
+#p5-mask{position:absolute;left:50%;top:7%;transform:translateX(-50%) rotate(-3deg);width:min(66vw,400px);z-index:0;pointer-events:none;
+  filter:drop-shadow(6px 7px 0 #000);opacity:.95;}
+#p5-mask path{fill:#e60012;stroke:#fff;stroke-width:3;}
+@media(max-width:640px){.p5-vert{display:none;}#p5-mask{top:3%;width:80vw;}}
 <script>
 (function(){
   function ransomize(el){
@@ -3311,6 +3350,21 @@ function confetti(x,y){
       var d=document.createElement('div'); d.id='p5-stars';
       d.style.cssText="position:fixed;inset:0;z-index:-2;pointer-events:none;background-image:url(\"data:image/svg+xml,"+encodeURIComponent(s)+"\");background-size:92px 92px;";
       document.body.appendChild(d);
+    }
+    /* login decor: Phantom mask + vertical text + barcode footer */
+    var lg=document.getElementById('login');
+    if(lg&&!document.getElementById('p5-mask')){
+      var mask=document.createElementNS('http://www.w3.org/2000/svg','svg');
+      mask.id='p5-mask'; mask.setAttribute('viewBox','0 0 200 92');
+      mask.innerHTML="<path fill-rule='evenodd' d='M8 46 C20 8 72 6 96 30 C100 34 100 34 104 30 C128 6 180 8 192 46 C180 84 128 86 104 62 C100 58 100 58 96 62 C72 86 20 84 8 46 Z M44 42 a17 12 0 1 0 0.1 0 Z M156 42 a17 12 0 1 0 0.1 0 Z'/>";
+      lg.appendChild(mask);
+      var vt=document.createElement('div'); vt.className='p5-vert'; vt.textContent='TAKE YOUR HEART'; lg.appendChild(vt);
+    }
+    var li=document.querySelector('#login .login-inner');
+    if(li&&!li.querySelector('.p5-card-foot')){
+      var foot=document.createElement('div'); foot.className='p5-card-foot';
+      foot.innerHTML='<div class="p5-barcode"></div><div class="code">PHANTOM · 0x4F2A</div>';
+      li.appendChild(foot);
     }
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initP5); else initP5();
