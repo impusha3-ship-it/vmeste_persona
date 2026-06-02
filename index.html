@@ -978,12 +978,40 @@ html{background:#0a0a0a!important;}
 /* ---- P5 page transition: skew-slam + red slash ---- */
 .page.glitch-in{animation:p5slam .42s cubic-bezier(.2,.85,.3,1.15) both!important;}
 @keyframes p5slam{0%{opacity:0;transform:translateX(46px) skewX(-12deg)}55%{opacity:1;transform:translateX(-8px) skewX(3deg)}80%{transform:translateX(3px) skewX(-1deg)}100%{opacity:1;transform:none}}
-.page.glitch-in::after{background:linear-gradient(116deg,var(--p5-red) 0%,var(--p5-red) 40%,transparent 60%)!important;height:100%!important;animation:p5slash .42s ease-out 1!important;}
-@keyframes p5slash{0%{transform:translateX(-110%) skewX(-12deg);opacity:.9}100%{transform:translateX(160%) skewX(-12deg);opacity:0}}
+.page.glitch-in::after{background:linear-gradient(116deg,var(--p5-red) 0%,var(--p5-red) 38%,transparent 56%)!important;height:100%!important;opacity:0;animation:p5slash .42s ease-out 1 forwards!important;}
+@keyframes p5slash{0%{transform:translateX(-120%) skewX(-12deg);opacity:.92}99%{opacity:.3}100%{transform:translateX(170%) skewX(-12deg);opacity:0}}
 @media(prefers-reduced-motion:reduce){.page.glitch-in{animation:fadeIn .3s ease both!important;}.page.glitch-in::after{display:none!important;}}
 
 /* card hover wobble disabled (cyber RGB glitch) replaced above */
 .ach-card:hover,.pcard:hover,.ev-card:hover,.stat-cell:hover,.tg-ms:hover,.envelope:hover,.nav-tab:hover{animation:none!important;}
+
+/* ---- Дима / Оля select — Persona duotone split ---- */
+#login-step-who{background:#0a0a0a!important;}
+.who-d::before{
+  background-color:#0a0a0a!important;
+  background-image:
+    radial-gradient(circle at 30% 78%,rgba(230,0,18,.60),transparent 60%),
+    radial-gradient(circle at 72% 22%,rgba(230,0,18,.38),transparent 55%),
+    radial-gradient(rgba(230,0,18,.32) 1.5px,transparent 1.7px)!important;
+  background-size:cover,cover,16px 16px!important;}
+.who-o::before{
+  background-color:#f2ede1!important;
+  background-image:
+    radial-gradient(circle at 70% 78%,rgba(0,0,0,.24),transparent 60%),
+    radial-gradient(circle at 25% 22%,rgba(0,0,0,.15),transparent 58%),
+    radial-gradient(rgba(0,0,0,.24) 1.5px,transparent 1.7px)!important;
+  background-size:cover,cover,16px 16px!important;}
+.who-opt::after{background:repeating-linear-gradient(0deg,rgba(0,0,0,.10) 0,rgba(0,0,0,.10) 1px,transparent 2px,transparent 4px)!important;}
+.who-name{font-family:'Oswald',sans-serif!important;font-weight:700!important;font-style:italic!important;letter-spacing:.01em!important;}
+.who-d .who-name{color:#fff!important;text-shadow:6px 6px 0 #000!important;}
+.who-o .who-name{color:#0a0a0a!important;text-shadow:6px 6px 0 var(--p5-red)!important;}
+.who-hint{font-family:'Oswald',sans-serif!important;font-style:italic!important;font-weight:600!important;letter-spacing:.32em!important;}
+.who-d .who-hint{color:rgba(255,255,255,.82)!important;}
+.who-o .who-hint{color:rgba(10,10,10,.7)!important;}
+/* red diagonal divider blade between the two panels */
+#login-step-who::before{content:'';position:absolute;left:50%;top:-12%;width:8px;height:124%;
+  background:var(--p5-red);box-shadow:0 0 0 4px #000;transform:translateX(-50%) rotate(9deg);z-index:3;pointer-events:none;}
+@media(max-width:680px){#login-step-who::before{width:124%;height:8px;left:-12%;top:50%;transform:translateY(-50%) rotate(-5deg);}}
 </style>
 </head>
 <body>
@@ -2761,11 +2789,11 @@ function confetti(x,y){
     var boot=document.createElement('div');boot.className='cy-boot';
     inner.insertBefore(boot,inner.firstChild);
     var lines=[
-      '> ИНИЦИАЛИЗАЦИЯ НЕЙРОЛИНКА ...',
-      '> ОБХОД ICE-ЗАЩИТЫ ............ [OK]',
-      '> ДЕШИФРОВКА ОСКОЛКА ПАМЯТИ ...',
-      '> КАНАЛ УСТАНОВЛЕН :: О ♥ Д',
-      '> ВВЕДИТЕ КОД ДОСТУПА_'
+      '★ ФАНТОМНЫЕ ВОРЫ СЕРДЕЦ',
+      'Сегодня мы украдём одно сердце ♥',
+      'Цель определена :: О & Д',
+      'Шоу вот-вот начнётся...',
+      'ВВЕДИТЕ КОД ДОСТУПА_'
     ];
     var li=0,ci=0,txt='';
     (function type(){
