@@ -1111,6 +1111,63 @@ html{background:#0a0a0a!important;}
 /* status bar party-number vibe: cyan / magenta */
 #cy-status .stk .o{color:var(--p5-cyan)!important;}
 </style>
+
+<!-- ===== P5 TIER + PET + QUESTION-CHAT ===== -->
+<style id="p5-tier-chat">
+/* ---- TIER LISTS → P5 panels ---- */
+.tl-card{background:#0e0e0e!important;border:3px solid #fff!important;border-radius:0!important;box-shadow:6px 6px 0 #000!important;}
+.tl-week{color:var(--p5-red)!important;font-family:'Montserrat',sans-serif!important;font-weight:700!important;}
+.tl-theme{font-family:'Oswald',sans-serif!important;font-style:italic!important;font-weight:700!important;color:#fff!important;text-transform:uppercase;}
+.tl-tier{border-radius:0!important;background:#070707!important;border:2px solid #fff!important;overflow:visible!important;}
+.tl-tier-lbl{font-family:'Oswald',sans-serif!important;font-style:italic!important;font-weight:700!important;color:#fff!important;transform:skewX(-7deg);}
+.tlc0 .tl-tier-lbl{background:#e60012!important;}      /* S */
+.tlc1 .tl-tier-lbl{background:#ff5a5a!important;}      /* A */
+.tlc2 .tl-tier-lbl{background:#27d3ff!important;color:#06070d!important;} /* B */
+.tlc3 .tl-tier-lbl{background:#ff3ea5!important;}      /* C */
+.tlc4 .tl-tier-lbl{background:#f7f3ea!important;color:#06070d!important;} /* D */
+.tl-chip{background:#0a0a0a!important;border:2px solid #fff!important;border-radius:0!important;color:#fff!important;font-family:'Montserrat',sans-serif!important;font-weight:600!important;}
+.tl-chip.sel{border-color:var(--p5-red)!important;background:var(--p5-red)!important;color:#fff!important;box-shadow:3px 3px 0 #000!important;}
+.tl-pool{border:2px dashed #fff!important;border-radius:0!important;}
+.tl-pool-head,.tl-vote-sub,.tl-vote-head{color:var(--p5-cyan)!important;font-family:'Montserrat',sans-serif!important;}
+.tl-vote-item{background:#0a0a0a!important;border:2px solid #fff!important;border-radius:0!important;color:#fff!important;}
+.tl-vote-item.on{border-color:var(--p5-red)!important;background:rgba(230,0,18,.14)!important;box-shadow:3px 3px 0 #000!important;}
+.tl-vote-title{font-family:'Oswald',sans-serif!important;font-style:italic!important;color:#fff!important;}
+.tl-armed .tl-tier:hover{box-shadow:inset 0 0 0 3px var(--p5-red)!important;}
+.tl-arch-item{background:#0a0a0a!important;border:2px solid #fff!important;border-radius:0!important;color:#fff!important;}
+.tl-arch-item:hover{border-color:var(--p5-red)!important;}
+.tl-arch-who.d{color:var(--p5-red)!important;}.tl-arch-who.o{color:var(--p5-cyan)!important;}
+
+/* ---- PET (Амням) frame → P5 panel ---- */
+.pet-stage-wrap{border:3px solid #fff!important;background:#0a0a0a!important;box-shadow:7px 7px 0 var(--p5-red)!important;margin:0 auto 1.4rem;max-width:300px;clip-path:polygon(3% 0,100% 0,100% 90%,94% 100%,0 100%,0 6%);}
+.pet-lvl span{color:var(--p5-red)!important;}
+.pet-mood b{color:var(--p5-cyan)!important;}
+.pet-trait span{color:var(--p5-magenta)!important;}
+
+/* ===== QUESTION OF DAY → phone-chat (ref image 1) ===== */
+.q-card{background:var(--p5-red)!important;}
+/* prompt = black bubble at top */
+.q-text{display:inline-block!important;background:#0a0a0a!important;color:#fff!important;border:3px solid #fff!important;
+  padding:.7rem 1.05rem!important;box-shadow:5px 5px 0 #000!important;transform:skewX(-3deg)!important;margin-bottom:.4rem!important;
+  font-style:normal!important;}
+.q-date{background:#fff!important;color:#0a0a0a!important;display:inline-block!important;padding:1px 8px!important;transform:skewX(-8deg);}
+/* answers as chat thread: Дима left, Оля right */
+.q-answers{display:flex!important;flex-direction:column!important;gap:30px!important;grid-template-columns:none!important;margin-top:1.6rem!important;}
+.q-ans{max-width:84%!important;margin-bottom:0!important;}
+.q-ans.d{align-self:flex-start!important;}
+.q-ans.o{align-self:flex-end!important;}
+/* speaker name tab above bubble (Makoto-style) */
+.q-ans-who{position:absolute!important;top:-13px!important;left:12px!important;background:#0a0a0a!important;color:#fff!important;
+  border:2px solid #fff!important;padding:1px 9px!important;font-family:'Oswald',sans-serif!important;font-style:italic!important;
+  font-size:12px!important;letter-spacing:.04em!important;margin:0!important;z-index:2;}
+.q-ans.o .q-ans-who{left:auto!important;right:12px!important;background:#fff!important;color:#0a0a0a!important;border-color:#000!important;}
+/* tails on the correct side */
+.q-ans.o::before,.q-ans.o::after{left:auto!important;right:24px!important;}
+/* yellow corner triangle accent (like ref portraits) */
+.q-ans.d::after{box-shadow:none;}
+.q-ans.d{background:#0a0a0a!important;}
+.q-ans.d .q-ans-text{color:#fff!important;}
+@media(max-width:600px){.q-ans{max-width:92%!important;}}
+</style>
 </head>
 <body>
 
@@ -2542,11 +2599,11 @@ const PET_STAGES=[
 function petStage(lvl){let s=PET_STAGES[0];for(const st of PET_STAGES)if(lvl>=st.min)s=st;return s;}
 // палитра по уровню
 function petPalette(lvl){
-  if(lvl>=18)return{c:'#ffd24a',g:'rgba(255,210,74,.9)'};
-  if(lvl>=14)return{c:'#d4b87a',g:'rgba(212,184,122,.9)'};
-  if(lvl>=10)return{c:'#ff2a6d',g:'rgba(255,42,109,.9)'};
-  if(lvl>=6)return{c:'#05ffa1',g:'rgba(5,255,161,.9)'};
-  return{c:'#00f0ff',g:'rgba(0,240,255,.9)'};
+  if(lvl>=18)return{c:'#ffffff',g:'rgba(255,255,255,.9)'};
+  if(lvl>=14)return{c:'#ff3ea5',g:'rgba(255,62,165,.9)'};
+  if(lvl>=10)return{c:'#27d3ff',g:'rgba(39,211,255,.9)'};
+  if(lvl>=6)return{c:'#ff5a5a',g:'rgba(255,90,90,.9)'};
+  return{c:'#e60012',g:'rgba(230,0,18,.9)'};
 }
 // SVG Амняма по уровню+настроению. body растёт, черты/декор добавляются.
 function petSVG(lvl,mood){
