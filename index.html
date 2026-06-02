@@ -3226,6 +3226,55 @@ function confetti(x,y){
 #login #pwd{background:#0a0a0a!important;border:3px solid #fff!important;color:#fff!important;text-align:center;letter-spacing:.4em;}
 #login .login-btn{background:#0a0a0a!important;border:3px solid #fff!important;color:#fff!important;}
 #login .login-btn:hover{background:#fff!important;color:var(--p5-red)!important;}
+
+/* calling-card typed text → ink-on-card, not terminal */
+#login .cy-boot{font-family:'Oswald',sans-serif!important;font-style:italic!important;font-weight:600!important;
+  color:#120202!important;text-shadow:none!important;font-size:clamp(14px,3.4vw,18px)!important;line-height:1.55!important;
+  letter-spacing:.005em!important;text-transform:none!important;text-align:left!important;}
+
+/* ===== Дима / Оля — full rework: tilted ID-card panels ===== */
+#login-step-who{background:#0a0a0a!important;display:flex!important;align-items:center!important;justify-content:center!important;
+  gap:clamp(16px,4vw,56px)!important;padding:clamp(1rem,4vw,3rem)!important;}
+#login-step-who::before{display:none!important;}
+.who-opt{flex:0 0 auto!important;width:min(42vw,330px)!important;height:min(66vh,470px)!important;
+  border:none!important;border-radius:0!important;overflow:hidden!important;cursor:pointer;background:#0a0a0a!important;
+  clip-path:polygon(4% 0,100% 2%,96% 100%,0 98%)!important;
+  transition:transform .32s cubic-bezier(.22,1,.36,1)!important;
+  filter:drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff) drop-shadow(9px 11px 0 #000)!important;}
+.who-d{transform:rotate(-2.5deg)!important;}
+.who-o{transform:rotate(2.5deg)!important;}
+.who-d::before{opacity:1!important;transform:none!important;background:#e60012!important;
+  background-image:radial-gradient(rgba(0,0,0,.26) 1.5px,transparent 1.7px)!important;background-size:15px 15px!important;}
+.who-o::before{opacity:1!important;transform:none!important;background:#f2ede1!important;
+  background-image:radial-gradient(rgba(0,0,0,.18) 1.5px,transparent 1.7px)!important;background-size:15px 15px!important;}
+/* big star emblem (repurpose ::after, was scanlines) */
+.who-opt::after{content:'★'!important;position:absolute!important;left:-9%!important;bottom:-7%!important;top:auto!important;right:auto!important;
+  font-size:40vh!important;line-height:1!important;z-index:1!important;background:none!important;mix-blend-mode:normal!important;pointer-events:none;}
+.who-d::after{color:rgba(0,0,0,.16)!important;}
+.who-o::after{color:rgba(230,0,18,.15)!important;}
+.who-name{position:relative;z-index:2;font-family:'Oswald',sans-serif!important;font-style:italic!important;font-weight:700!important;
+  font-size:clamp(40px,8vw,86px)!important;letter-spacing:.02em!important;}
+.who-d .who-name{color:#fff!important;text-shadow:5px 5px 0 #000!important;}
+.who-o .who-name{color:#0a0a0a!important;text-shadow:5px 5px 0 #e60012!important;}
+.who-hint{position:relative;z-index:2;opacity:1!important;transform:none!important;margin-top:1rem;
+  font-family:'Oswald',sans-serif!important;font-style:italic!important;font-weight:600!important;letter-spacing:.28em!important;font-size:13px!important;}
+.who-d .who-hint{color:rgba(255,255,255,.85)!important;}
+.who-o .who-hint{color:rgba(10,10,10,.7)!important;}
+/* neutralize old flex-grow / brightness hover */
+#login-step-who:hover .who-opt{flex-grow:0!important;filter:drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff) drop-shadow(9px 11px 0 #000)!important;}
+.who-opt:hover{transform:rotate(0deg) scale(1.06)!important;z-index:3!important;
+  filter:drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff) drop-shadow(11px 13px 0 var(--p5-red))!important;}
+@media(max-width:560px){
+  #login-step-who{flex-direction:column!important;}
+  .who-opt{width:min(82vw,320px)!important;height:min(34vh,260px)!important;}
+  .who-d{transform:rotate(-2deg)!important;}.who-o{transform:rotate(2deg)!important;}
+  .who-opt::after{font-size:26vh!important;}
+}
+
+/* ===== question of day: keep tilt on thread, level the input field ===== */
+#q-wrap > .q-card:first-child .q-form{transform:rotate(1.7deg)!important;background:#0e0e0e!important;border:3px solid #fff!important;
+  padding:1rem 1.1rem!important;margin-top:1.6rem!important;box-shadow:4px 4px 0 #000!important;}
+#q-wrap > .q-card:first-child .q-hint{transform:rotate(1.7deg)!important;}
 </style>
 <script>
 (function(){
