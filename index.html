@@ -1055,6 +1055,62 @@ html{background:#0a0a0a!important;}
 @keyframes p5speed{0%{opacity:.5;transform:scale(1.15)}100%{opacity:0;transform:scale(1)}}
 @media(prefers-reduced-motion:reduce){.page.glitch-in::before{display:none!important;}}
 </style>
+
+<!-- ===== P5 REF REFINEMENT — frames / shapes / colors from screenshots ===== -->
+<style id="p5-ref">
+:root{--p5-cyan:#27d3ff;--p5-magenta:#ff3ea5;}
+
+/* NON-clipped panels: hard black box-shadow */
+.cal-cell,.ach-card,.track,.photo-card{box-shadow:6px 6px 0 #000 !important;}
+/* torn-paper jagged clip + drop-shadow (box-shadow gets clipped, filter does not) */
+.pcard,.stat-cell,.ev-card,.envelope,.tg-ms,.q-card{
+  clip-path:polygon(2% 0,100% 0,100% 84%,95% 100%,0 100%,0 7%) !important;
+  box-shadow:none !important;filter:drop-shadow(6px 6px 0 #000);}
+/* subtle layered rotation → chaotic comic stack */
+.pcard,.ev-card{transform:rotate(-.7deg);}
+.stat-cell,.tg-ms{transform:rotate(.55deg);}
+.pcard:hover,.ev-card:hover{transform:translate(-3px,-3px) rotate(-.7deg)!important;filter:drop-shadow(9px 9px 0 var(--p5-red))!important;}
+.stat-cell:hover,.tg-ms:hover{transform:translate(-3px,-3px) rotate(.55deg)!important;filter:drop-shadow(9px 9px 0 var(--p5-red))!important;}
+.q-card:hover,.envelope:hover{filter:drop-shadow(9px 9px 0 var(--p5-red))!important;}
+.ach-card:hover,.track:hover,.photo-card:hover{box-shadow:10px 10px 0 var(--p5-red)!important;}
+
+/* numbers: cyan / magenta HUD accents (keep big totals red) */
+.stat-sub,.bar-pct{color:var(--p5-cyan)!important;text-shadow:1px 1px 0 #000!important;}
+.ach-cat-count b{color:var(--p5-magenta)!important;}
+.tg-cu span,.tg-ms-lbl{color:var(--p5-cyan)!important;}
+.pcard.olga .pcard-streak{color:var(--p5-cyan)!important;text-shadow:2px 2px 0 #000!important;}
+
+/* ---- question answers → comic speech bubbles with tails ---- */
+.q-ans{position:relative;border-radius:0!important;margin-bottom:10px!important;border:3px solid #fff!important;}
+.q-ans.d{background:#0a0a0a!important;color:#fff!important;box-shadow:5px 5px 0 var(--p5-red)!important;}
+.q-ans.o{background:#f7f3ea!important;border-color:#000!important;color:#141414!important;box-shadow:5px 5px 0 #000!important;}
+.q-ans.o .q-ans-text{color:#222!important;}
+.q-ans.o .q-ans-who{color:var(--p5-red)!important;}
+.q-ans.d .q-ans-who{color:var(--p5-cyan)!important;}
+/* bubble tail (outline + fill) */
+.q-ans::before,.q-ans::after{content:'';position:absolute;bottom:-17px;left:26px;width:0;height:0;border:9px solid transparent;}
+.q-ans.d::before{border-top-color:#fff;left:24px;bottom:-19px;border-width:10px;}
+.q-ans.d::after{border-top-color:#0a0a0a;}
+.q-ans.o::before{border-top-color:#000;left:24px;bottom:-19px;border-width:10px;}
+.q-ans.o::after{border-top-color:#f7f3ea;}
+
+/* speaker-label accent box: first letter highlighted (MΛKOTO trick) */
+.q-ans-who::first-letter{background:var(--p5-red);color:#fff;padding:0 3px;}
+.q-ans.o .q-ans-who::first-letter{background:#000;color:#fff;}
+
+/* title banner: slight tilt + white outer outline (keeps the ★) */
+.page-title{transform:skewX(-8deg) rotate(-1.4deg)!important;box-shadow:7px 7px 0 #000,0 0 0 3px #000!important;}
+
+/* letters/envelopes: angular comic envelope, white outline */
+.envelope{border:3px solid #fff!important;}
+.envelope.unlocked{box-shadow:none!important;filter:drop-shadow(6px 6px 0 var(--p5-red));}
+
+/* nav active tab: add a tiny star + stronger slant */
+.nav-tab.active{transform:skewX(-11deg)!important;}
+
+/* status bar party-number vibe: cyan / magenta */
+#cy-status .stk .o{color:var(--p5-cyan)!important;}
+</style>
 </head>
 <body>
 
