@@ -1168,8 +1168,8 @@ html{background:#0a0a0a!important;}
 .q-ans.d .q-ans-text{color:#fff!important;}
 @media(max-width:600px){.q-ans{max-width:92%!important;}}
 
-/* current-day panel = tilted irregular "phone screen" with white outline (drop-shadow stack follows clip) */
-#q-wrap > .q-card:first-child{
+/* every question panel = tilted irregular "phone screen" with white outline (drop-shadow stack follows clip) */
+#q-wrap .q-card{
   border:none!important;background:var(--p5-red)!important;
   clip-path:polygon(3% 1%,100% 0,97.5% 98%,0.5% 100%,0 6%)!important;
   transform:rotate(-1.7deg)!important;
@@ -1179,8 +1179,11 @@ html{background:#0a0a0a!important;}
     drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff)
     drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff)
     drop-shadow(9px 11px 0 #000)!important;}
-/* counter the panel tilt on its text so it stays readable, but keep slight life */
-#q-wrap > .q-card:first-child .q-text{transform:skewX(-3deg) rotate(1.7deg)!important;}
+/* alternate tilt for a natural stacked feel */
+#q-wrap .q-card:nth-of-type(even){transform:rotate(1.5deg)!important;}
+/* counter the panel tilt on the question text so it stays readable */
+#q-wrap .q-card .q-text{transform:skewX(-3deg) rotate(1.7deg)!important;}
+#q-wrap .q-card:nth-of-type(even) .q-text{transform:skewX(-3deg) rotate(-1.5deg)!important;}
 </style>
 </head>
 <body>
