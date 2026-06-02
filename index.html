@@ -945,7 +945,7 @@ html{background:#0a0a0a!important;}
 #login{background:#0a0a0a!important;}
 .login-subtitle{color:var(--p5-red)!important;text-shadow:2px 2px 0 #000!important;}
 .cy-boot{color:#fff!important;text-shadow:none!important;font-family:'Montserrat',monospace!important;}
-.cy-access.grant{background:rgba(230,0,18,.9)!important;color:#fff!important;text-shadow:3px 3px 0 #000!important;}
+.cy-access.grant{background:rgba(8,8,8,.86)!important;color:var(--p5-red)!important;text-shadow:3px 3px 0 #000!important;}
 .cy-access.deny{background:rgba(10,10,10,.92)!important;color:var(--p5-red)!important;text-shadow:3px 3px 0 #000!important;}
 .cy-access b{font-family:'Oswald',sans-serif!important;font-style:italic!important;}
 .cy-side{color:rgba(230,0,18,.55)!important;text-shadow:none!important;font-family:'Oswald',sans-serif!important;font-style:italic!important;font-weight:700!important;letter-spacing:.3em!important;}
@@ -1012,6 +1012,48 @@ html{background:#0a0a0a!important;}
 #login-step-who::before{content:'';position:absolute;left:50%;top:-12%;width:8px;height:124%;
   background:var(--p5-red);box-shadow:0 0 0 4px #000;transform:translateX(-50%) rotate(9deg);z-index:3;pointer-events:none;}
 @media(max-width:680px){#login-step-who::before{width:124%;height:8px;left:-12%;top:50%;transform:translateY(-50%) rotate(-5deg);}}
+
+/* ===== COMIC LAYER — ideas from P5R opening cinematic ===== */
+:root{--p5-blue:#1fc3ff;} /* velvet-room accent (Royal) */
+
+/* page title → slanted red comic banner with black border + hard shadow */
+.page-title{
+  background:var(--p5-red)!important;color:#fff!important;display:inline-block!important;
+  padding:.1em .55em .16em!important;border:3px solid #000!important;
+  box-shadow:7px 7px 0 #000!important;text-shadow:3px 3px 0 #000!important;
+  transform:skewX(-8deg)!important;position:relative;}
+/* little star tab on the banner (Phantom Thieves mark) */
+.page-title::after{content:'★';position:absolute;right:-.62em;top:-.55em;font-size:.5em;color:#fff;
+  -webkit-text-stroke:2px #000;text-shadow:none;transform:skewX(8deg) rotate(-12deg);}
+
+/* red/white "caution-tape" diagonal stripe band above the status bar */
+#cy-status{border-top:none!important;}
+#cy-status::before{content:'';position:absolute;left:0;right:0;top:-9px;height:9px;
+  background:repeating-linear-gradient(45deg,var(--p5-red) 0 13px,#f7f3ea 13px 26px);
+  box-shadow:0 -1px 0 #000,0 1px 0 #000;}
+
+/* big faint star watermark behind login + headings energy */
+#login::after{content:'★';position:absolute;right:-4vw;bottom:-6vh;font-size:46vh;line-height:1;
+  color:transparent;-webkit-text-stroke:3px rgba(230,0,18,.16);z-index:0;pointer-events:none;transform:rotate(-10deg);}
+.login-monogram{position:relative;z-index:1;}
+
+/* comic-panel double frame + slight tilt energy on key cards (hover) */
+.pcard:hover,.stat-cell:hover,.ev-card:hover,.tg-ms:hover{transform:translate(-3px,-3px) rotate(-.6deg)!important;}
+.ach-card.done{box-shadow:7px 7px 0 #000, 0 0 0 3px var(--p5-red) inset!important;}
+
+/* velvet-blue secondary accent: Оля's checked / "together" milestone hits */
+.tg-ms-val{color:var(--p5-red)!important;}
+.leg-dot{box-shadow:none!important;}
+
+/* nav logo: comic outline pop */
+.nav-logo{-webkit-text-stroke:1px #000;}
+
+/* speed-lines burst on page enter (under the slash) */
+.page.glitch-in::before{content:'';position:absolute;inset:0;z-index:49;pointer-events:none;opacity:0;
+  background:repeating-conic-gradient(from 0deg at 50% 45%,rgba(255,255,255,.05) 0deg 2deg,transparent 2deg 6deg);
+  animation:p5speed .42s ease-out 1 forwards;}
+@keyframes p5speed{0%{opacity:.5;transform:scale(1.15)}100%{opacity:0;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.page.glitch-in::before{display:none!important;}}
 </style>
 </head>
 <body>
